@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-primary bg-info fixed-top rounded">
+  <div class="container">
+    <a class="navbar-brand" href="#" routerLink="/ecommerce">Ecommerce Space</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarResponsive"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      (click)="toggleCollapsed()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      id="navbarResponsive"
+     
+    >
+    <!-- [ngClass]="{ 'collapse': collapsed, 'navbar-collapse': true }" -->
+    <div class="d-flex align-items-center">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLink="/products">Products</a>
+        </li>
+        <li class="nav-item ml-auto" *ngIf="!authService.isLoggedIn">
+          <a class="nav-link" href="#" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item ml-auto" *ngIf="!authService.isLoggedIn">
+          <a class="nav-link" href="#" routerLink="/register">Register</a>
+        </li>
+        <li class="nav-item ml-auto" *ngIf="authService.isLoggedIn">
+          <button
+            (click)="logout()"
+            type="button"
+            class="btn btn-default"
+          >
+            Logout
+          </button>
+        </li>
+      </ul></div>
+    </div>
+  </div>
+</nav>
+
+<div class="row">
+  <div class="col-md-9">
+    <app-cards
+      #productsC
+      [hidden]="orderFinished"
+      (productAdded)="addProductToCart($event)"
+    ></app-cards>
+  </div>
+  <div class="col-md-3">
+    <app-panier
+      [productAdded]="productAdded"
+      (onOrderFinished)="finishOrder($event)"
+      #shoppingCartC
+      [hidden]="orderFinished"
+    ></app-panier>
+  </div>
+</div>

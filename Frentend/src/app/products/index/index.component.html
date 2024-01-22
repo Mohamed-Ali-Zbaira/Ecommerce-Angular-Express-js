@@ -1,0 +1,95 @@
+<nav class="navbar navbar-expand-lg navbar-primary bg-info fixed-top rounded">
+    <div class="container">
+      <a class="navbar-brand" href="#" routerLink="/ecommerce">Ecommerce Space</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarResponsive"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+      id="navbarResponsive"
+     
+    >
+    <!-- [ngClass]="{ 'collapse': collapsed, 'navbar-collapse': true }" -->
+    <div class="d-flex align-items-center">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLink="/products">Products</a>
+        </li>
+        <li class="nav-item ml-auto" *ngIf="!authService.isLoggedIn">
+          <a class="nav-link" href="#" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item ml-auto" *ngIf="!authService.isLoggedIn">
+          <a class="nav-link" href="#" routerLink="/register">Register</a>
+        </li>
+        <li class="nav-item ml-auto" *ngIf="authService.isLoggedIn">
+          <button
+            (click)="logout()"
+            type="button"
+            class="btn btn-default"
+          >
+            Logout
+          </button>
+        </li>
+      </ul></div>
+    </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h2>Les produits</h2>
+    
+    <div class="mb-3">
+        <app-create></app-create>
+    </div>
+
+    <div class="mb-3">
+        <input matInput class="form-control" (keyup)="filter($event)" placeholder="Rechercher">
+    </div>
+
+    <table mat-table [dataSource]="products" class="table table-striped table-bordered mt-3" #mytable matSort>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+
+        <ng-container matColumnDef="imageart">
+            <th mat-header-cell *matHeaderCellDef>Image</th>
+            <td mat-cell *matCellDef="let t"><img src="{{ t.imageart }}" alt="" width="80" height="80" /></td>
+        </ng-container>
+
+        <ng-container matColumnDef="designation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Désignation</th>
+            <td mat-cell *matCellDef="let t">{{ t.designation }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="marque">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Marque</th>
+            <td mat-cell *matCellDef="let t">{{ t.marque }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="prix">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Prix</th>
+            <td mat-cell *matCellDef="let t">{{ t.prix }} TND</td>
+        </ng-container>
+
+        <ng-container matColumnDef="_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let t">
+                <app-view [productId]="t._id"></app-view>
+                <app-edit [productId]="t._id"></app-edit>
+                <button type="button" (click)="deleteProduct(t._id)" class="btn btn-default">
+                    <i class="bi bi-trash-fill" style="color:red"></i>
+                </button>
+            </td>
+        </ng-container>
+    </table>
+
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20]" showFirstLastButtons class="mt-3"></mat-paginator>
+</div>
+
+

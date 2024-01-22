@@ -1,0 +1,83 @@
+<nav class="navbar navbar-expand-lg navbar-primary bg-info fixed-top rounded">
+    <div class="container">
+      <a class="navbar-brand" href="#" routerLink="/ecommerce">Ecommerce Space</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarResponsive"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="navbarResponsive">
+        <button class="bg-info">
+          <a class="nav-link" href="#" routerLink="/login">Login</a>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 border rounded p-4 bg-info">
+        <form (ngSubmit)="Ajoutuser()">
+          <h3 class="h3 mb-3 font-weight-normal text-center">User Registration</h3>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              [(ngModel)]="user.email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              [(ngModel)]="user.password"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="firstname" class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstname"
+              name="firstname"
+              placeholder="Enter your first name"
+              [(ngModel)]="user.firstname"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="lastname" class="form-label">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastname"
+              name="lastname"
+              placeholder="Enter your last name"
+              [(ngModel)]="user.lastname"
+              required
+            />
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
